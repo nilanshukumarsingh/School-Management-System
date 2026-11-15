@@ -38,6 +38,17 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Ensure MongoDB is connected for serverless invocations
+app.use(async (req, res, next) => {
+  try {
+    const { connectDB } = require('./config/db');
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Swagger OpenAPI Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

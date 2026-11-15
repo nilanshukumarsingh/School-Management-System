@@ -33,4 +33,9 @@ const startServer = async () => {
   }
 };
 
-startServer();
+// Start server listener when executed directly (standalone / local dev)
+if (require.main === module || !process.env.VERCEL) {
+  startServer();
+}
+
+module.exports = app;

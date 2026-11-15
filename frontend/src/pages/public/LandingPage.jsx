@@ -104,7 +104,7 @@ export const LandingPage = () => {
               Role Matrix
             </a>
             <a
-              href="http://localhost:5000/api-docs"
+              href="/api-docs"
               target="_blank"
               rel="noreferrer"
               className="px-3 py-1.5 rounded-full flex items-center gap-1 hover:text-indigo-600 hover:bg-white transition shadow-2xs text-slate-500"
@@ -967,7 +967,7 @@ export const LandingPage = () => {
               </p>
               <div className="pt-2 flex flex-wrap gap-3">
                 <a
-                  href="http://localhost:5000/api-docs"
+                  href="/api-docs"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-md shadow-indigo-600/20"
@@ -1026,7 +1026,7 @@ export const LandingPage = () => {
               Sign In
             </Link>
             <a
-              href="http://localhost:5000/api-docs"
+              href="/api-docs"
               target="_blank"
               rel="noreferrer"
               className="hover:text-white transition flex items-center gap-1"

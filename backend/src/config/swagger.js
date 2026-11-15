@@ -12,6 +12,10 @@ const swaggerDocument = {
   },
   servers: [
     {
+      url: '/',
+      description: 'Current Environment / Relative API Root',
+    },
+    {
       url: 'http://localhost:5000',
       description: 'Local Development Server',
     },
