@@ -285,9 +285,9 @@ export const ExaminationsPage = () => {
               <thead className="bg-slate-50 text-slate-500 font-bold uppercase border-b border-slate-200">
                 <tr>
                   <th className="p-3">Subject</th>
-                  <th className="p-3 w-28">Marks Obtained</th>
-                  <th className="p-3 w-24">Max Marks</th>
-                  <th className="p-3 w-24">Pass Mark</th>
+                  <th className="p-3 w-32 text-center">Marks Obtained</th>
+                  <th className="p-3 w-28 text-center">Max Marks</th>
+                  <th className="p-3 w-28 text-center">Pass Mark</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">

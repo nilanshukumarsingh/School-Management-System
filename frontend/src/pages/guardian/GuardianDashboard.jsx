@@ -48,7 +48,7 @@ export const GuardianDashboard = () => {
         </h1>
         <p className="text-sm text-slate-500 mt-1">
           Welcome, <strong>{guardian.name}</strong> • Linked to {children.length} student(s) with
-          strict family privacy (Acceptance Test #4).
+          strict family privacy and verified data security.
         </p>
       </div>
 
@@ -118,7 +118,7 @@ export const GuardianDashboard = () => {
                 {/* Latest Exam Snapshot */}
                 <div className="border-t border-slate-100 pt-3 text-xs">
                   <span className="text-slate-400 font-bold uppercase text-[10px] block mb-1.5">
-                    Latest Exam Assessment:
+                    Latest Examination Result:
                   </span>
                   {results.length > 0 ? (
                     <div className="flex items-center justify-between bg-indigo-50/60 p-2.5 rounded-xl border border-indigo-100">

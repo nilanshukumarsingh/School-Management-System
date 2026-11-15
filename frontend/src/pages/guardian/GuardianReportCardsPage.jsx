@@ -52,7 +52,7 @@ export const GuardianReportCardsPage = () => {
             Official Academic Report Cards
           </h1>
           <p className="text-sm text-slate-500">
-            Acceptance Test #4: Complete examination results for authorized linked children.
+            Complete examination transcripts and performance reports for linked children.
           </p>
         </div>
         <Button variant="secondary" icon={Printer} onClick={() => window.print()}>
@@ -116,10 +116,10 @@ export const GuardianReportCardsPage = () => {
                 <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                   <tr>
                     <th className="py-3 px-4">Subject</th>
-                    <th className="py-3 px-4 font-mono text-center">Score</th>
-                    <th className="py-3 px-4 text-center">Max Marks</th>
-                    <th className="py-3 px-4 text-center">Passing</th>
-                    <th className="py-3 px-4 text-right">Status</th>
+                    <th className="py-3 px-4 w-28 text-center font-mono">Score</th>
+                    <th className="py-3 px-4 w-28 text-center">Max Marks</th>
+                    <th className="py-3 px-4 w-28 text-center">Passing</th>
+                    <th className="py-3 px-4 w-28 text-right">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">

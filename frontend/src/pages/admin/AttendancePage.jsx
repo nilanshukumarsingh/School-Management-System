@@ -237,7 +237,7 @@ export const AttendancePage = () => {
           </div>
         </div>
 
-        {/* Duplicate Overwrite Guard Toggle (Acceptance Test #2) */}
+        {/* Duplicate Overwrite Guard Toggle */}
         <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
           <label className="flex items-center gap-2 cursor-pointer text-slate-700 font-medium">
             <input
@@ -247,8 +247,8 @@ export const AttendancePage = () => {
               className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
             />
             <span>
-              <strong>Overwrite if record exists</strong> (If unchecked, database unique constraint
-              will reject duplicate submissions with 409 Conflict)
+              <strong>Overwrite if record exists</strong> (Enforces database uniqueness
+              constraint against duplicate submissions when unchecked)
             </span>
           </label>
 
@@ -312,10 +312,10 @@ export const AttendancePage = () => {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-3.5 px-4">Roll</th>
+                  <th className="py-3.5 px-4 text-center w-20">Roll</th>
                   <th className="py-3.5 px-4">Student</th>
-                  <th className="py-3.5 px-4">Admission #</th>
-                  <th className="py-3.5 px-4">Status</th>
+                  <th className="py-3.5 px-4 w-36">Admission #</th>
+                  <th className="py-3.5 px-4 text-center w-80">Attendance Status</th>
                   <th className="py-3.5 px-4">Remarks</th>
                 </tr>
               </thead>
@@ -324,7 +324,7 @@ export const AttendancePage = () => {
                   const currentStatus = recordsMap[student._id]?.status || 'PRESENT';
                   return (
                     <tr key={student._id} className="hover:bg-slate-50/60 transition">
-                      <td className="py-3 px-4 font-mono font-bold text-xs">
+                      <td className="py-3 px-4 text-center font-mono font-bold text-xs text-slate-700">
                         {student.rollNumber || '-'}
                       </td>
                       <td className="py-3 px-4">
@@ -332,11 +332,11 @@ export const AttendancePage = () => {
                           {student.firstName} {student.lastName}
                         </span>
                       </td>
-                      <td className="py-3 px-4 font-mono text-xs text-indigo-600">
+                      <td className="py-3 px-4 font-mono text-xs text-indigo-600 font-bold">
                         {student.admissionNumber}
                       </td>
-                      <td className="py-3 px-4">
-                        <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50">
+                      <td className="py-3 px-4 text-center">
+                        <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50 shadow-xs">
                           {['PRESENT', 'LATE', 'ABSENT', 'LEAVE'].map((st) => (
                             <button
                               key={st}

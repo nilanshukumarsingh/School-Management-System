@@ -108,11 +108,11 @@ export const TeacherReportsPage = () => {
             <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
               <tr>
                 <th className="py-3 px-4">Rank / Student</th>
-                <th className="py-3 px-4">Admission #</th>
-                <th className="py-3 px-4">Total Score</th>
-                <th className="py-3 px-4">Percentage</th>
-                <th className="py-3 px-4">Grade</th>
-                <th className="py-3 px-4 text-right">Result Status</th>
+                <th className="py-3 px-4 w-36">Admission #</th>
+                <th className="py-3 px-4 w-36 text-center">Total Score</th>
+                <th className="py-3 px-4 w-28 text-center">Percentage</th>
+                <th className="py-3 px-4 w-24 text-center">Grade</th>
+                <th className="py-3 px-4 w-32 text-right">Result Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -128,14 +128,14 @@ export const TeacherReportsPage = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-mono text-xs text-indigo-600">
+                  <td className="py-3 px-4 font-mono font-bold text-xs text-indigo-600">
                     {r.studentId?.admissionNumber}
                   </td>
-                  <td className="py-3 px-4 font-bold text-slate-800">
+                  <td className="py-3 px-4 text-center font-bold text-slate-800">
                     {r.totalObtained} / {r.totalMaxMarks}
                   </td>
-                  <td className="py-3 px-4 font-bold text-slate-900">{r.percentage}%</td>
-                  <td className="py-3 px-4 font-extrabold text-indigo-600">{r.grade}</td>
+                  <td className="py-3 px-4 text-center font-bold text-slate-900">{r.percentage}%</td>
+                  <td className="py-3 px-4 text-center font-extrabold text-indigo-600">{r.grade}</td>
                   <td className="py-3 px-4 text-right">
                     <Badge variant={r.status === 'PASS' ? 'success' : 'danger'} size="xs">
                       {r.status}

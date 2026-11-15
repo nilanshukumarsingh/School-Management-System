@@ -151,11 +151,11 @@ export const TeachersPage = () => {
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Instructor</th>
-                  <th className="py-3.5 px-4">Employee ID</th>
+                  <th className="py-3.5 px-4 w-36">Employee ID</th>
                   <th className="py-3.5 px-4">Designation & Qualification</th>
                   <th className="py-3.5 px-4">Specialization</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                  <th className="py-3.5 px-4 text-center w-28">Status</th>
+                  <th className="py-3.5 px-4 text-right w-24">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -189,7 +189,7 @@ export const TeachersPage = () => {
                     <td className="py-3.5 px-4 text-xs font-medium text-slate-600">
                       {t.specialization || 'General'}
                     </td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-center">
                       <Badge
                         variant={t.availabilityStatus === 'AVAILABLE' ? 'success' : 'warning'}
                         size="xs"

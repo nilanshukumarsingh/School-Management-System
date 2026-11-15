@@ -209,14 +209,14 @@ export const FeesPage = () => {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-3.5 px-4">Invoice #</th>
+                  <th className="py-3.5 px-4 w-40">Invoice #</th>
                   <th className="py-3.5 px-4">Student</th>
                   <th className="py-3.5 px-4">Fee Title</th>
-                  <th className="py-3.5 px-4">Total</th>
-                  <th className="py-3.5 px-4">Paid</th>
-                  <th className="py-3.5 px-4">Due Balance</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4 text-right">Action</th>
+                  <th className="py-3.5 px-4 text-right">Total</th>
+                  <th className="py-3.5 px-4 text-right">Paid</th>
+                  <th className="py-3.5 px-4 text-right">Due Balance</th>
+                  <th className="py-3.5 px-4 text-center w-28">Status</th>
+                  <th className="py-3.5 px-4 text-right w-36">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -234,10 +234,10 @@ export const FeesPage = () => {
                       </span>
                     </td>
                     <td className="py-3.5 px-4 text-xs font-medium text-slate-700">{inv.title}</td>
-                    <td className="py-3.5 px-4 font-bold text-slate-900">${inv.totalAmount}</td>
-                    <td className="py-3.5 px-4 font-bold text-emerald-600">${inv.paidAmount}</td>
-                    <td className="py-3.5 px-4 font-bold text-rose-600">${inv.dueAmount}</td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-right font-bold text-slate-900">${inv.totalAmount}</td>
+                    <td className="py-3.5 px-4 text-right font-bold text-emerald-600">${inv.paidAmount}</td>
+                    <td className="py-3.5 px-4 text-right font-bold text-rose-600">${inv.dueAmount}</td>
+                    <td className="py-3.5 px-4 text-center">
                       <Badge
                         variant={
                           inv.status === 'PAID'

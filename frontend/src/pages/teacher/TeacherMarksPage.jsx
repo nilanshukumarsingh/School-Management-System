@@ -127,7 +127,7 @@ export const TeacherMarksPage = () => {
             Examination Gradebook
           </h1>
           <p className="text-sm text-slate-500">
-            Acceptance Test #3: Automated percentage, GPA and letter grade calculations.
+            Real-time percentage, GPA and letter grade calculations for enrolled students.
           </p>
         </div>
         <Button
@@ -212,10 +212,10 @@ export const TeacherMarksPage = () => {
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3 px-4">Subject</th>
-                  <th className="py-3 px-4 w-32">Marks Obtained</th>
+                  <th className="py-3 px-4 w-36 text-center">Marks Obtained</th>
                   <th className="py-3 px-4 w-28 text-center">Max Marks</th>
                   <th className="py-3 px-4 w-28 text-center">Passing</th>
-                  <th className="py-3 px-4 text-right">Live Status</th>
+                  <th className="py-3 px-4 w-32 text-right">Live Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">

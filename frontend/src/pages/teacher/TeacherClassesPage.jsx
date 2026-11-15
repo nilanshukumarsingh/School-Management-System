@@ -52,7 +52,7 @@ export const TeacherClassesPage = () => {
           My Authorized Classes & Students
         </h1>
         <p className="text-sm text-slate-500">
-          Strictly authorized views for instructional staff (Acceptance Test #1).
+          Scoped classroom and student roster for assigned sections.
         </p>
       </div>
 
@@ -89,22 +89,22 @@ export const TeacherClassesPage = () => {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-3 px-4">Roll</th>
+                  <th className="py-3 px-4 w-20 text-center">Roll</th>
                   <th className="py-3 px-4">Student</th>
-                  <th className="py-3 px-4">Admission #</th>
-                  <th className="py-3 px-4">Gender</th>
-                  <th className="py-3 px-4">Emergency Contact</th>
+                  <th className="py-3 px-4 w-36">Admission #</th>
+                  <th className="py-3 px-4 w-28 text-center">Gender</th>
+                  <th className="py-3 px-4 w-64">Emergency Contact</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {students.map((s) => (
                   <tr key={s._id} className="hover:bg-slate-50/60 transition">
-                    <td className="py-3 px-4 font-mono font-bold text-xs">{s.rollNumber || '-'}</td>
+                    <td className="py-3 px-4 text-center font-mono font-bold text-xs text-slate-700">{s.rollNumber || '-'}</td>
                     <td className="py-3 px-4 font-semibold text-slate-900">
                       {s.firstName} {s.lastName}
                     </td>
-                    <td className="py-3 px-4 font-mono text-xs text-indigo-600">{s.admissionNumber}</td>
-                    <td className="py-3 px-4 text-xs font-medium">{s.gender}</td>
+                    <td className="py-3 px-4 font-mono font-bold text-xs text-indigo-600">{s.admissionNumber}</td>
+                    <td className="py-3 px-4 text-center text-xs font-medium">{s.gender}</td>
                     <td className="py-3 px-4 text-xs text-slate-500">
                       {s.emergencyContact?.name ? `${s.emergencyContact.name} (${s.emergencyContact.phone})` : 'Parent on file'}
                     </td>

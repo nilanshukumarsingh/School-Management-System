@@ -128,7 +128,7 @@ export const TeacherAttendancePage = () => {
             Daily Attendance Register
           </h1>
           <p className="text-sm text-slate-500">
-            Acceptance Test #1: You can only record attendance for your authorized classes.
+            Record and review student attendance for assigned sections.
           </p>
         </div>
         <Button
@@ -197,8 +197,8 @@ export const TeacherAttendancePage = () => {
               className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
             />
             <span>
-              <strong>Overwrite if already marked today</strong> (Acceptance Test #2: unique compound
-              index rejects duplicates if unchecked)
+              <strong>Overwrite if already marked today</strong> (Enforces database uniqueness
+              constraint when unchecked)
             </span>
           </label>
         </div>
@@ -239,11 +239,11 @@ export const TeacherAttendancePage = () => {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-3 px-4">Roll</th>
-                  <th className="py-3 px-4">Student</th>
-                  <th className="py-3 px-4">Admission #</th>
-                  <th className="py-3 px-4">Status</th>
-                  <th className="py-3 px-4">Teacher Remarks</th>
+                  <th className="py-3.5 px-4 text-center w-20">Roll</th>
+                  <th className="py-3.5 px-4">Student</th>
+                  <th className="py-3.5 px-4 w-36">Admission #</th>
+                  <th className="py-3.5 px-4 text-center w-80">Attendance Status</th>
+                  <th className="py-3.5 px-4">Teacher Remarks</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -251,15 +251,19 @@ export const TeacherAttendancePage = () => {
                   const currentStatus = recordsMap[student._id]?.status || 'PRESENT';
                   return (
                     <tr key={student._id} className="hover:bg-slate-50/60 transition">
-                      <td className="py-3 px-4 font-mono font-bold text-xs">{student.rollNumber || '-'}</td>
-                      <td className="py-3 px-4 font-semibold text-slate-900">
-                        {student.firstName} {student.lastName}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-xs text-indigo-600">
-                        {student.admissionNumber}
+                      <td className="py-3 px-4 text-center font-mono font-bold text-xs text-slate-700">
+                        {student.rollNumber || '-'}
                       </td>
                       <td className="py-3 px-4">
-                        <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50">
+                        <span className="font-semibold text-slate-900 block">
+                          {student.firstName} {student.lastName}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 font-mono text-xs text-indigo-600 font-bold">
+                        {student.admissionNumber}
+                      </td>
+                      <td className="py-3 px-4 text-center">
+                        <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50 shadow-xs">
                           {['PRESENT', 'LATE', 'ABSENT', 'LEAVE'].map((st) => (
                             <button
                               key={st}

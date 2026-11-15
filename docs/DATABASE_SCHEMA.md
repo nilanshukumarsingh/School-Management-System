@@ -37,18 +37,18 @@ erDiagram
     FEE_INVOICE ||--|{ PAYMENT : "reconciles with"
 
     USER {
-        ObjectId _id PK
+        ObjectId id PK
         string name
-        string email UK
+        string email "unique"
         string passwordHash
-        string role "ADMIN | TEACHER | GUARDIAN"
+        string role
         string status
         date lastLogin
     }
 
     STUDENT {
-        ObjectId _id PK
-        string admissionNumber UK
+        ObjectId id PK
+        string admissionNumber "unique"
         string firstName
         string lastName
         date dateOfBirth
@@ -61,9 +61,9 @@ erDiagram
     }
 
     TEACHER {
-        ObjectId _id PK
-        ObjectId userId FK, UK
-        string employeeId UK
+        ObjectId id PK
+        ObjectId userId FK "unique"
+        string employeeId "unique"
         string designation
         string qualification
         string specialization
@@ -71,22 +71,22 @@ erDiagram
     }
 
     GUARDIAN {
-        ObjectId _id PK
-        ObjectId userId FK, UK
+        ObjectId id PK
+        ObjectId userId FK "unique"
         string relationship
         string occupation
-        ObjectId[] linkedStudentIds FK
+        Array linkedStudentIds FK
     }
 
     ACADEMIC_CLASS {
-        ObjectId _id PK
+        ObjectId id PK
         string name
         number gradeLevel
         string academicYear
     }
 
     SECTION {
-        ObjectId _id PK
+        ObjectId id PK
         string name
         ObjectId classId FK
         string roomNumber
@@ -94,7 +94,7 @@ erDiagram
     }
 
     SUBJECT {
-        ObjectId _id PK
+        ObjectId id PK
         string name
         string code
         ObjectId classId FK
@@ -102,7 +102,7 @@ erDiagram
     }
 
     TEACHER_ASSIGNMENT {
-        ObjectId _id PK
+        ObjectId id PK
         ObjectId teacherId FK
         ObjectId classId FK
         ObjectId sectionId FK
@@ -112,81 +112,81 @@ erDiagram
     }
 
     ATTENDANCE {
-        ObjectId _id PK
+        ObjectId id PK
         ObjectId studentId FK
         ObjectId classId FK
         ObjectId sectionId FK
-        string date "YYYY-MM-DD"
-        string session "FULL_DAY | MORNING | AFTERNOON"
-        string status "PRESENT | ABSENT | LATE | LEAVE"
+        string date
+        string session
+        string status
         ObjectId recordedBy FK
     }
 
     EXAMINATION {
-        ObjectId _id PK
+        ObjectId id PK
         string name
         string examType
         string academicYear
         date startDate
         date endDate
-        object[] gradingRules
+        Array gradingRules
         string status
     }
 
     EXAM_RESULT {
-        ObjectId _id PK
+        ObjectId id PK
         ObjectId examinationId FK
         ObjectId studentId FK
         ObjectId classId FK
         ObjectId sectionId FK
-        object[] marks
+        Array marks
         number totalObtained
         number totalMaxMarks
         number percentage
         string grade
         number gpa
-        string status "PASS | FAIL"
+        string status
     }
 
     FEE_STRUCTURE {
-        ObjectId _id PK
+        ObjectId id PK
         string name
         ObjectId classId FK
         string academicYear
         string term
-        object[] components
+        Array components
         number totalAmount
         date dueDate
     }
 
     FEE_INVOICE {
-        ObjectId _id PK
-        string invoiceNumber UK
+        ObjectId id PK
+        string invoiceNumber "unique"
         ObjectId studentId FK
         ObjectId classId FK
         ObjectId feeStructureId FK
         number totalAmount
         number paidAmount
         number dueAmount
-        string status "PENDING | PARTIALLY_PAID | PAID"
+        string status
         date dueDate
     }
 
     PAYMENT {
-        ObjectId _id PK
-        string transactionId UK
+        ObjectId id PK
+        string transactionId "unique"
         ObjectId invoiceId FK
         ObjectId studentId FK
         number amountPaid
         string paymentMethod
-        string receiptNumber UK
-        string status "COMPLETED"
-        string idempotencyKey UK
+        string receiptNumber "unique"
+        string status
+        string idempotencyKey "unique"
         date paymentDate
     }
 
     AUDIT_LOG {
-        ObjectId _id PK
+        ObjectId id PK
         ObjectId userId FK
         string userName
         string userRole
@@ -204,18 +204,18 @@ erDiagram
 
 ## 2. Key Indexes & Constraint Guarantees
 
-1. **Duplicate Attendance Elimination (Acceptance Test #2)**
+1. **Duplicate Attendance Elimination**
    - Compound Unique Index: `{ studentId: 1, date: 1, session: 1 }` with `unique: true`
    - Guarantees at database level that duplicate records cannot be generated on the same date and session.
 
-2. **Teacher Assignment Boundaries (Acceptance Test #1)**
+2. **Teacher Assignment Boundaries**
    - Compound Unique Index: `{ teacherId: 1, classId: 1, sectionId: 1, subjectId: 1, academicYear: 1 }` with `unique: true`
 
-3. **Exam Result Uniqueness (Acceptance Test #3)**
+3. **Exam Result Uniqueness**
    - Compound Unique Index: `{ examinationId: 1, studentId: 1 }` with `unique: true`
    - Guarantees one comprehensive result per student per exam cohort.
 
-4. **Fee Ledger Idempotency & Reconciliation (Acceptance Test #5)**
+4. **Fee Ledger Idempotency & Reconciliation**
    - Unique Index: `transactionId`
    - Sparse Unique Index: `idempotencyKey` prevents duplicate transaction submissions.
-   - Reconciled: `invoice.paidAmount` is strictly equal to $\sum (\text{COMPLETED payments})$.
+   - Reconciled: `invoice.paidAmount` is strictly equal to the sum of all `COMPLETED` payments.

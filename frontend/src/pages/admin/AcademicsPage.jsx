@@ -264,10 +264,10 @@ export const AcademicsPage = () => {
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Subject</th>
-                  <th className="py-3.5 px-4">Code</th>
-                  <th className="py-3.5 px-4">Class</th>
-                  <th className="py-3.5 px-4">Credits</th>
-                  <th className="py-3.5 px-4">Type</th>
+                  <th className="py-3.5 px-4 w-32">Code</th>
+                  <th className="py-3.5 px-4 w-36">Class</th>
+                  <th className="py-3.5 px-4 text-center w-28">Credits</th>
+                  <th className="py-3.5 px-4 text-center w-36">Type</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -275,9 +275,9 @@ export const AcademicsPage = () => {
                   <tr key={s._id} className="hover:bg-slate-50/60 transition">
                     <td className="py-3.5 px-4 font-semibold text-slate-900">{s.name}</td>
                     <td className="py-3.5 px-4 font-mono font-bold text-xs text-indigo-600">{s.code}</td>
-                    <td className="py-3.5 px-4">{s.classId?.name || 'All'}</td>
-                    <td className="py-3.5 px-4 font-medium">{s.credits} Credits</td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-slate-700">{s.classId?.name || 'All'}</td>
+                    <td className="py-3.5 px-4 text-center font-medium">{s.credits} Credits</td>
+                    <td className="py-3.5 px-4 text-center">
                       <Badge variant={s.isElective ? 'warning' : 'neutral'} size="xs">
                         {s.isElective ? 'Elective' : 'Core Required'}
                       </Badge>
@@ -298,10 +298,10 @@ export const AcademicsPage = () => {
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Teacher</th>
-                  <th className="py-3.5 px-4">Class & Section</th>
-                  <th className="py-3.5 px-4">Assigned Subject</th>
-                  <th className="py-3.5 px-4">Class Teacher?</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                  <th className="py-3.5 px-4 w-44">Class & Section</th>
+                  <th className="py-3.5 px-4 w-52">Assigned Subject</th>
+                  <th className="py-3.5 px-4 text-center w-36">Role</th>
+                  <th className="py-3.5 px-4 text-right w-24">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -312,10 +312,10 @@ export const AcademicsPage = () => {
                         <span className="font-semibold text-slate-900">
                           {asg.teacherId?.userId?.name || asg.teacherId?.employeeId}
                         </span>
-                        <span className="text-xs text-slate-400">({asg.teacherId?.employeeId})</span>
+                        <span className="text-xs text-slate-400 font-mono">({asg.teacherId?.employeeId})</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 font-medium">
+                    <td className="py-3.5 px-4 font-medium text-slate-800">
                       {asg.classId?.name} - Section {asg.sectionId?.name}
                     </td>
                     <td className="py-3.5 px-4">
@@ -327,7 +327,7 @@ export const AcademicsPage = () => {
                         <span className="text-slate-400 italic">Homeroom Only</span>
                       )}
                     </td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-center">
                       <Badge variant={asg.isClassTeacher ? 'purple' : 'neutral'} size="xs">
                         {asg.isClassTeacher ? 'Class Teacher' : 'Subject Faculty'}
                       </Badge>

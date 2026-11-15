@@ -230,32 +230,34 @@ export const LandingPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Admin Card */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-purple-300 transition-all shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xl mb-4">
-                👑
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-purple-300 transition-all shadow-sm flex flex-col justify-between h-full">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xl mb-4">
+                  👑
+                </div>
+                <h4 className="text-lg font-bold text-slate-900">Administrator</h4>
+                <p className="text-xs text-slate-500 mt-1 mb-4">
+                  Full institutional governance and administrative controls.
+                </p>
+                <ul className="text-xs text-slate-600 space-y-2 mb-6">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
+                    Manage students, teachers & guardians
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
+                    Create classes, sections & subjects
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
+                    Fee structures & simulated transactions
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
+                    Comprehensive system audit trail
+                  </li>
+                </ul>
               </div>
-              <h4 className="text-lg font-bold text-slate-900">Administrator</h4>
-              <p className="text-xs text-slate-500 mt-1 mb-4">
-                Full institutional governance and administrative controls.
-              </p>
-              <ul className="text-xs text-slate-600 space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
-                  Manage students, teachers & guardians
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
-                  Create classes, sections & subjects
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
-                  Fee structures & simulated transactions
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-purple-600" />
-                  Comprehensive system audit trail
-                </li>
-              </ul>
               <Button
                 variant="secondary"
                 size="sm"
@@ -267,32 +269,34 @@ export const LandingPage = () => {
             </div>
 
             {/* Teacher Card */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-indigo-300 transition-all shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xl mb-4">
-                👩‍🏫
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-indigo-300 transition-all shadow-sm flex flex-col justify-between h-full">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xl mb-4">
+                  👩‍🏫
+                </div>
+                <h4 className="text-lg font-bold text-slate-900">Teacher</h4>
+                <p className="text-xs text-slate-500 mt-1 mb-4">
+                  Dedicated classroom management for assigned classes only.
+                </p>
+                <ul className="text-xs text-slate-600 space-y-2 mb-6">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
+                    Access strictly assigned classes/sections
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
+                    Mark daily attendance (Present, Late, Absent)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
+                    Enter marks with automatic validation
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
+                    Class academic performance reports
+                  </li>
+                </ul>
               </div>
-              <h4 className="text-lg font-bold text-slate-900">Teacher</h4>
-              <p className="text-xs text-slate-500 mt-1 mb-4">
-                Dedicated classroom management for assigned classes only.
-              </p>
-              <ul className="text-xs text-slate-600 space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
-                  Access strictly assigned classes/sections
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
-                  Mark daily attendance (Present, Late, Absent)
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
-                  Enter marks with automatic validation
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-indigo-600" />
-                  Class academic performance reports
-                </li>
-              </ul>
               <Button
                 variant="secondary"
                 size="sm"
@@ -306,32 +310,34 @@ export const LandingPage = () => {
             </div>
 
             {/* Guardian Card */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-emerald-300 transition-all shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xl mb-4">
-                👨‍👩‍👦
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-emerald-300 transition-all shadow-sm flex flex-col justify-between h-full">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xl mb-4">
+                  👨‍👩‍👦
+                </div>
+                <h4 className="text-lg font-bold text-slate-900">Guardian & Student</h4>
+                <p className="text-xs text-slate-500 mt-1 mb-4">
+                  Secure visibility into their own linked children only.
+                </p>
+                <ul className="text-xs text-slate-600 space-y-2 mb-6">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    Strict privacy (no access to other students)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    Real-time attendance record & percentage
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    Full examination report cards & GPA
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    Simulated fee invoice checkout & receipts
+                  </li>
+                </ul>
               </div>
-              <h4 className="text-lg font-bold text-slate-900">Guardian & Student</h4>
-              <p className="text-xs text-slate-500 mt-1 mb-4">
-                Secure visibility into their own linked children only.
-              </p>
-              <ul className="text-xs text-slate-600 space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  Strict privacy (no access to other students)
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  Real-time attendance record & percentage
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  Full examination report cards & GPA
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  Simulated fee invoice checkout & receipts
-                </li>
-              </ul>
               <Button
                 variant="secondary"
                 size="sm"
@@ -351,25 +357,24 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* Acceptance Criteria Evidence Section */}
+      {/* Key Architectural Highlights Section */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2">
-              Technical Rigor
+              Architecture & Data Integrity
             </h2>
             <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              5 Core Institutional Workflows
+              Enterprise Academic Operations
             </h3>
             <p className="text-sm text-slate-500 mt-2">
-              Every workflow in this application has been built to satisfy high data integrity standards and
-              pass automated Jest integration tests.
+              Every workflow has been engineered with strict transactional consistency, automated verification, and production-grade security.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">TEST 1</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 01</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Teacher Scoped Access</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 Teachers are strictly authorized on the backend to view students and mark attendance
@@ -377,8 +382,8 @@ export const LandingPage = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">TEST 2</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 02</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Duplicate Attendance Guard</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 A MongoDB compound unique index on <code>(studentId, date, session)</code> guarantees
@@ -386,8 +391,8 @@ export const LandingPage = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">TEST 3</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 03</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Automated Gradebook</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 Exam results calculate total marks, percentage, GPA and letter grades (A+, A, B, C,
@@ -395,8 +400,8 @@ export const LandingPage = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">TEST 4</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 04</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Guardian Privacy Shield</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 Guardians can only view linked children profiles, report cards, and fee records.
@@ -404,8 +409,8 @@ export const LandingPage = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">TEST 5</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 05</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Reconciled Fee Ledger</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 Simulated payments record transaction entries in the ledger and automatically reconcile
@@ -413,8 +418,8 @@ export const LandingPage = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft">
-              <span className="text-xs font-extrabold text-indigo-600">BONUS</span>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-soft flex flex-col justify-start h-full">
+              <span className="text-xs font-extrabold text-indigo-600">FEATURE 06</span>
               <h4 className="text-base font-bold text-slate-900 mt-1">Full Audit Trail & Docs</h4>
               <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                 Every critical administrative action logs user, action, and payload details. Complete

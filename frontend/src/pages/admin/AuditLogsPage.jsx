@@ -100,12 +100,12 @@ export const AuditLogsPage = () => {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-3.5 px-4">Timestamp</th>
-                  <th className="py-3.5 px-4">Operator</th>
+                  <th className="py-3.5 px-4 w-48">Timestamp</th>
+                  <th className="py-3.5 px-4 w-48">Operator</th>
                   <th className="py-3.5 px-4">Action</th>
-                  <th className="py-3.5 px-4">Module</th>
-                  <th className="py-3.5 px-4">IP Address</th>
-                  <th className="py-3.5 px-4 text-right">Details</th>
+                  <th className="py-3.5 px-4 text-center w-32">Module</th>
+                  <th className="py-3.5 px-4 text-center w-36">IP Address</th>
+                  <th className="py-3.5 px-4 text-right w-20">Details</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 font-mono text-xs">
@@ -119,12 +119,12 @@ export const AuditLogsPage = () => {
                       <span className="text-[10px] text-slate-400 font-normal">({log.userRole})</span>
                     </td>
                     <td className="py-3.5 px-4 font-bold text-indigo-700">{log.action}</td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-center">
                       <Badge variant="neutral" size="xs">
                         {log.module}
                       </Badge>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-400">{log.ipAddress || '127.0.0.1'}</td>
+                    <td className="py-3.5 px-4 text-center text-slate-400 font-mono">{log.ipAddress || '127.0.0.1'}</td>
                     <td className="py-3.5 px-4 text-right">
                       <button
                         onClick={() => setSelectedLog(log)}

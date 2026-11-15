@@ -223,11 +223,11 @@ export const StudentsPage = () => {
               <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Student</th>
-                  <th className="py-3.5 px-4">Admission #</th>
+                  <th className="py-3.5 px-4 w-36">Admission #</th>
                   <th className="py-3.5 px-4">Class & Section</th>
-                  <th className="py-3.5 px-4">Roll</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                  <th className="py-3.5 px-4 text-center w-20">Roll</th>
+                  <th className="py-3.5 px-4 text-center w-28">Status</th>
+                  <th className="py-3.5 px-4 text-right w-24">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -252,11 +252,13 @@ export const StudentsPage = () => {
                     <td className="py-3.5 px-4 font-mono font-bold text-xs text-indigo-600">
                       {student.admissionNumber}
                     </td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 font-medium text-slate-800">
                       {student.classId?.name || 'Unassigned'} - Section {student.sectionId?.name || '-'}
                     </td>
-                    <td className="py-3.5 px-4 font-medium">{student.rollNumber || '-'}</td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3.5 px-4 text-center font-mono font-bold text-xs text-slate-700">
+                      {student.rollNumber || '-'}
+                    </td>
+                    <td className="py-3.5 px-4 text-center">
                       <Badge
                         variant={student.status === 'ENROLLED' ? 'success' : 'neutral'}
                         size="xs"

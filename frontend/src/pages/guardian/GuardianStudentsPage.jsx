@@ -32,7 +32,7 @@ export const GuardianStudentsPage = () => {
           Linked Student Profiles
         </h1>
         <p className="text-sm text-slate-500">
-          Acceptance Test #4: Secure view restricted solely to your authorized family members.
+          Secure portal view restricted solely to your authorized family members.
         </p>
       </div>
 
