@@ -266,7 +266,7 @@ export const GuardianFeesPage = () => {
             </div>
 
             <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed">
-              💡 <strong>Assessment Simulation:</strong> No actual financial transactions or card
+              💡 <strong>Demo Simulation:</strong> No actual financial transactions or card
               charges are performed. The ledger will automatically reconcile and issue a receipt.
             </div>
 

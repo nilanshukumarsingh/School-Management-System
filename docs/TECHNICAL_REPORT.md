@@ -2,8 +2,7 @@
 ## Project: ScholaVerse Academy School Management System
 
 **Author:** Nilanshu Kumar Singh  
-**Role:** Full-Stack Web Development Assessment  
-**Evaluation Standard:** 100 Marks Rubric Compliance  
+**Architecture:** Decoupled React + Node.js/Express + MongoDB Mongoose
 
 ---
 
@@ -29,7 +28,7 @@ Hiding UI controls is recognized as an incomplete security mechanism. ScholaVers
 
 ## 3. Demonstration of the 5 Core Acceptance Criteria
 
-| Criteria | Assessment Requirement | Technical Implementation | Verified Automated Test |
+| Core Workflow | Institutional Requirement | Technical Implementation | Verified Automated Test |
 |---|---|---|---|
 | **#1** | Teacher can access only assigned classes & mark attendance | `attendanceController.js` and `examController.js` verify `TeacherAssignment.exists({ teacherId, classId, sectionId })`. Rejects unassigned classes with `403 Forbidden`. | `src/tests/acceptance_criteria.test.js` (Test 1) |
 | **#2** | Duplicate attendance rejected or safely updated | Compound unique index `{ studentId: 1, date: 1, session: 1 }`. If `overwriteIfDuplicate=false`, rejects with `409 Conflict`. If `true`, executes safe bulk upsert. | `src/tests/acceptance_criteria.test.js` (Test 2) |

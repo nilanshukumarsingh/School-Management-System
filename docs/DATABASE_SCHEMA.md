@@ -14,10 +14,10 @@ erDiagram
     USER ||--o| GUARDIAN : "has profile"
     USER ||--o{ AUDIT_LOG : "performs actions"
 
-    CLASS ||--|{ SECTION : "contains"
-    CLASS ||--|{ SUBJECT : "offers"
-    CLASS ||--|{ STUDENT : "enrolled in"
-    CLASS ||--|{ FEE_STRUCTURE : "defines fees for"
+    ACADEMIC_CLASS ||--|{ SECTION : "contains"
+    ACADEMIC_CLASS ||--|{ SUBJECT : "offers"
+    ACADEMIC_CLASS ||--|{ STUDENT : "enrolled in"
+    ACADEMIC_CLASS ||--|{ FEE_STRUCTURE : "defines fees for"
 
     SECTION ||--|{ STUDENT : "contains"
     SECTION ||--|{ TEACHER_ASSIGNMENT : "allocated to"
@@ -78,7 +78,7 @@ erDiagram
         ObjectId[] linkedStudentIds FK
     }
 
-    CLASS {
+    ACADEMIC_CLASS {
         ObjectId _id PK
         string name
         number gradeLevel

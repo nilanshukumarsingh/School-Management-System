@@ -20,7 +20,7 @@ const { setupTestDB, clearCollections, generateAuthToken } = require('./testHelp
 
 setupTestDB();
 
-describe('School Management System - Assessment Acceptance Tests', () => {
+describe('School Management System - Core Workflows & Integrity Tests', () => {
   let adminUser, adminToken;
   let teacherUser1, teacherProfile1, teacherToken1;
   let teacherUser2, teacherProfile2, teacherToken2;

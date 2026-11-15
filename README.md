@@ -1,16 +1,15 @@
-# ScholaVerse — Next-Generation School Management Platform
-### Full-Stack Web Development Advanced Individual Project Assessment
+# ScholaVerse — Cloud School Management & Academic Operations System
 **Author:** Nilanshu Kumar Singh  
 **Repository:** [https://github.com/nilanshukumarsingh/School-Management-System.git](https://github.com/nilanshukumarsingh/School-Management-System.git)  
 
 ---
 
-## 1. Project Overview & Unique Name
-**ScholaVerse** is a modern, responsive, role-based School Management System engineered to streamline the day-to-day operations of educational institutions. It features three strictly segregated operational portals for **Administrators**, **Teachers**, and **Guardians**, underpinned by a resilient RESTful API and a structured MongoDB data model.
+## 1. Project Overview
+**ScholaVerse** is a modern, responsive, role-based School Management Platform engineered to streamline the day-to-day operations of educational institutions. It features three strictly segregated operational portals for **Administrators**, **Teachers**, and **Guardians**, underpinned by a resilient RESTful API and a structured MongoDB data model.
 
 ### 🌟 Key Highlights
 - **Role-Based Portals**: Dedicated workspaces for Admin, Teacher, and Guardian with server-side authorization guards.
-- **5 Verified Assessment Acceptance Criteria**:
+- **5 Core Business Workflows & Data Integrity Guarantees**:
   1. Teachers can access only assigned classes and record attendance.
   2. Duplicate attendance for the same student/session is rejected via unique compound indexes or safely updated.
   3. Examination marks and configurable grading rules automatically calculate totals, percentages, letter grades ($A+, A, B, C, D, F$), GPA, and report cards.
@@ -50,7 +49,7 @@
 
 ---
 
-## 3. Demo Credentials for Reviewers
+## 3. Demo Credentials
 
 The system includes pre-seeded demo accounts for each role. You can log in using these credentials or click the **1-Click Demo Login** buttons on the landing page:
 
@@ -143,7 +142,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser to access th
 
 ## 5. Automated Testing
 
-The backend includes a test suite covering the 5 core acceptance tests and negative edge cases:
+The backend includes an automated test suite covering all core business workflows and edge cases:
 
 ```bash
 cd backend
@@ -153,7 +152,7 @@ npm test
 ### Passing Test Output Summary:
 ```text
 PASS src/tests/acceptance_criteria.test.js
-  School Management System - Assessment Acceptance Tests
+  School Management System - Acceptance Tests
     Acceptance Test 1: Teacher Class Authorization
       ✓ allows a teacher to record attendance for an ASSIGNED class/section (634 ms)
       ✓ rejects a teacher trying to record attendance for an UNASSIGNED section (403 Forbidden) (191 ms)
@@ -195,10 +194,10 @@ erDiagram
     USER ||--o| GUARDIAN : "profile"
     USER ||--o{ AUDIT_LOG : "generates"
 
-    CLASS ||--|{ SECTION : "has"
-    CLASS ||--|{ SUBJECT : "offers"
-    CLASS ||--|{ STUDENT : "contains"
-    CLASS ||--|{ FEE_STRUCTURE : "bills"
+    ACADEMIC_CLASS ||--|{ SECTION : "has"
+    ACADEMIC_CLASS ||--|{ SUBJECT : "offers"
+    ACADEMIC_CLASS ||--|{ STUDENT : "contains"
+    ACADEMIC_CLASS ||--|{ FEE_STRUCTURE : "bills"
 
     SECTION ||--|{ TEACHER_ASSIGNMENT : "allocated to"
     TEACHER ||--|{ TEACHER_ASSIGNMENT : "teaches"
@@ -215,7 +214,7 @@ erDiagram
     FEE_INVOICE ||--|{ PAYMENT : "reconciles with"
 ```
 
-*For complete schema attributes, index definitions, and types, see [docs/DATABASE_SCHEMA.md](file:///c:/Users/asus/Desktop/School%20Management%20System/docs/DATABASE_SCHEMA.md).*
+*For complete schema attributes, index definitions, and types, see [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md).*
 
 ---
 
@@ -234,7 +233,7 @@ Key endpoints documented:
 
 ---
 
-## 8. Technical Design Decisions & Rubric Alignment
+## 8. Technical Design Decisions & System Architecture
 
 1. **Modular Express Architecture**: Separation of routes, controllers, models, and middleware enables clean testability and code maintainability.
 2. **Server-Side Security**: Authentication tokens are signed with HMAC SHA-256 JWTs. RBAC middleware verifies role permissions on every API request.
@@ -244,13 +243,13 @@ Key endpoints documented:
    - Invoice totals are reconciled by querying the actual completed payment ledger.
 4. **Audit Trail**: High-impact business actions automatically log actor details, affected IDs, and metadata changes to the `AuditLog` collection.
 
-*For detailed architectural rationale, see [docs/TECHNICAL_REPORT.md](file:///c:/Users/asus/Desktop/School%20Management%20System/docs/TECHNICAL_REPORT.md).*
+*For detailed architectural rationale, see [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md).*
 
 ---
 
 ## 9. Known Assumptions & Limitations
-- **Simulated Payments Only**: As mandated by Section 3.H, no real payment gateway (Stripe/PayPal) is integrated. The simulated checkout records mock payment records with transaction receipts and validates ledger reconciliation.
-- **Single Institutional Domain**: The platform is modeled as a single institution multi-tenant system with academic years rather than a multi-school SaaS hosting disparate districts.
+- **Simulated Payments**: No real payment gateway (Stripe/PayPal) is integrated. The simulated checkout records mock payment records with transaction receipts and validates ledger reconciliation.
+- **Single Institutional Domain**: The platform is modeled as a single institution system with academic years rather than a multi-school SaaS hosting disparate districts.
 
 ---
 

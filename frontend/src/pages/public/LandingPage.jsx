@@ -105,10 +105,10 @@ export const LandingPage = () => {
                 calculations, and simulated fee ledger reconciliation.
               </p>
 
-              {/* 1-Click Interactive Evaluation Demos */}
+              {/* 1-Click Interactive Demo Portals */}
               <div className="pt-2">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-                  🚀 Instant 1-Click Demo Logins for Reviewers:
+                  🚀 Instant 1-Click Role Portals:
                 </p>
                 <div className="flex flex-wrap gap-2.5">
                   <button
@@ -359,10 +359,10 @@ export const LandingPage = () => {
               Technical Rigor
             </h2>
             <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              5 Crucial Assessment Acceptance Tests
+              5 Core Institutional Workflows
             </h3>
             <p className="text-sm text-slate-500 mt-2">
-              Every workflow in this application has been built to satisfy the core business rules and
+              Every workflow in this application has been built to satisfy high data integrity standards and
               pass automated Jest integration tests.
             </p>
           </div>
@@ -436,7 +436,7 @@ export const LandingPage = () => {
           </div>
 
           <div className="text-xs text-slate-500 text-center md:text-right">
-            Full-Stack Web Development Assessment Submission • Algions AI Labs
+            ScholaVerse Enterprise Academic Operations System
             <div className="mt-1">Built with React.js, Tailwind CSS, Express.js & MongoDB</div>
           </div>
         </div>
