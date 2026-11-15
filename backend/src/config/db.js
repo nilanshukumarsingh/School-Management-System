@@ -4,15 +4,38 @@ const connectDB = async (uri = process.env.MONGODB_URI) => {
   if (mongoose.connection.readyState >= 1) {
     return mongoose.connection;
   }
+
+  const primaryUri = uri || 'mongodb://127.0.0.1:27017/scholaverse';
+  const localFallback = 'mongodb://127.0.0.1:27017/scholaverse';
+
   try {
-    const mongoUri = uri || 'mongodb://127.0.0.1:27017/scholaverse';
-    const conn = await mongoose.connect(mongoUri, {
-      autoIndex: process.env.NODE_ENV !== 'production', // Build indexes in dev / seeds
+    const conn = await mongoose.connect(primaryUri, {
+      autoIndex: process.env.NODE_ENV !== 'production',
+      serverSelectionTimeoutMS: 5000,
     });
     console.log(`[MongoDB] Connected to database: ${conn.connection.name} @ ${conn.connection.host}`);
     return conn;
   } catch (error) {
-    console.error(`[MongoDB] Connection error: ${error.message}`);
+    console.warn(`[MongoDB] Primary connection attempt failed: ${error.message}`);
+
+    // If primary failed on local machine (e.g. Atlas bad auth or network offline),
+    // automatically fall back to local running MongoDB instance
+    if (!process.env.VERCEL && primaryUri !== localFallback) {
+      try {
+        console.log(`[MongoDB] Attempting fallback to local instance: ${localFallback}...`);
+        const fallbackConn = await mongoose.connect(localFallback, {
+          autoIndex: true,
+          serverSelectionTimeoutMS: 5000,
+        });
+        console.log(
+          `[MongoDB] Successfully connected to fallback local database: ${fallbackConn.connection.name}`
+        );
+        return fallbackConn;
+      } catch (fallbackError) {
+        console.error(`[MongoDB] Local fallback failed: ${fallbackError.message}`);
+      }
+    }
+
     if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
       process.exit(1);
     }
