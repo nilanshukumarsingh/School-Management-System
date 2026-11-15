@@ -5,6 +5,7 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { CalendarCheck, Save, RefreshCw, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 export const AttendancePage = () => {
@@ -177,64 +178,59 @@ export const AttendancePage = () => {
       {/* Control Panel */}
       <Card className="p-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class</label>
-            <select
-              value={selectedClass}
-              onChange={(e) => {
-                setSelectedClass(e.target.value);
-                const firstSec = sections.find((s) => s.classId?._id === e.target.value);
-                if (firstSec) setSelectedSection(firstSec._id);
-              }}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {classes.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name} ({c.academicYear})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Class"
+            value={selectedClass}
+            onChange={(val) => {
+              setSelectedClass(val);
+              const firstSec = sections.find((s) => s.classId?._id === val || s.classId === val);
+              if (firstSec) setSelectedSection(firstSec._id);
+            }}
+            options={classes.map((c) => ({
+              value: c._id,
+              label: `${c.name} (${c.academicYear})`,
+            }))}
+            placeholder="Select class..."
+          />
+
+          <CustomSelect
+            label="Section"
+            value={selectedSection}
+            onChange={(val) => setSelectedSection(val)}
+            options={sections
+              .filter((s) => s.classId?._id === selectedClass || s.classId === selectedClass)
+              .map((s) => ({
+                value: s._id,
+                label: `Section ${s.name}`,
+                subtitle: s.roomNumber ? `Room ${s.roomNumber}` : 'General',
+              }))}
+            placeholder="Select section..."
+            disabled={!selectedClass}
+          />
 
           <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Section</label>
-            <select
-              value={selectedSection}
-              onChange={(e) => setSelectedSection(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {sections
-                .filter((s) => s.classId?._id === selectedClass || s.classId === selectedClass)
-                .map((s) => (
-                  <option key={s._id} value={s._id}>
-                    Section {s.name} ({s.roomNumber || 'Room N/A'})
-                  </option>
-                ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Date</label>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1 font-mono">
+              Date
+            </label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+              className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-200/90 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/15 shadow-xs font-medium text-slate-800"
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Session</label>
-            <select
-              value={session}
-              onChange={(e) => setSession(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="FULL_DAY">Full Day</option>
-              <option value="MORNING">Morning Session</option>
-              <option value="AFTERNOON">Afternoon Session</option>
-            </select>
-          </div>
+          <CustomSelect
+            label="Session"
+            value={session}
+            onChange={(val) => setSession(val)}
+            options={[
+              { value: 'FULL_DAY', label: 'Full Day' },
+              { value: 'MORNING', label: 'Morning Session' },
+              { value: 'AFTERNOON', label: 'Afternoon Session' },
+            ]}
+            placeholder="Select session..."
+          />
         </div>
 
         {/* Duplicate Overwrite Guard Toggle */}

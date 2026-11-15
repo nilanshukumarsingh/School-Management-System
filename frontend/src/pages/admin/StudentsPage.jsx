@@ -7,6 +7,7 @@ import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { TableSkeleton } from '../../components/common/Skeleton';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import {
   GraduationCap,
   Plus,
@@ -186,22 +187,22 @@ export const StudentsPage = () => {
             />
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <select
+          <div className="w-full sm:w-56">
+            <CustomSelect
               value={selectedClass}
-              onChange={(e) => {
-                setSelectedClass(e.target.value);
+              onChange={(val) => {
+                setSelectedClass(val);
                 setPage(1);
               }}
-              className="w-full sm:w-48 py-2 px-3 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="">All Classes</option>
-              {classes.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name} ({c.academicYear})
-                </option>
-              ))}
-            </select>
+              options={[
+                { value: '', label: 'All Enrolled Classes' },
+                ...classes.map((c) => ({
+                  value: c._id,
+                  label: `${c.name} (${c.academicYear})`,
+                })),
+              ]}
+              placeholder="Filter by Class..."
+            />
           </div>
         </div>
       </Card>
@@ -395,71 +396,58 @@ export const StudentsPage = () => {
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
               />
             </div>
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Gender *</label>
-              <select
-                value={formData.gender}
-                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-                <option value="OTHER">Other</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Blood Group
-              </label>
-              <select
-                value={formData.bloodGroup}
-                onChange={(e) => setFormData({ ...formData, bloodGroup: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'UNKNOWN'].map((bg) => (
-                  <option key={bg} value={bg}>
-                    {bg}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomSelect
+              label="Gender *"
+              value={formData.gender}
+              onChange={(val) => setFormData({ ...formData, gender: val })}
+              options={[
+                { value: 'MALE', label: 'Male' },
+                { value: 'FEMALE', label: 'Female' },
+                { value: 'OTHER', label: 'Other' },
+              ]}
+              placeholder="Select gender..."
+            />
+            <CustomSelect
+              label="Blood Group"
+              value={formData.bloodGroup}
+              onChange={(val) => setFormData({ ...formData, bloodGroup: val })}
+              options={['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'UNKNOWN'].map((bg) => ({
+                value: bg,
+                label: bg,
+              }))}
+              placeholder="Select blood group..."
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class *</label>
-              <select
-                required
-                value={formData.classId}
-                onChange={(e) => setFormData({ ...formData, classId: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="">Select Class</option>
-                {classes.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Section *</label>
-              <select
-                required
-                value={formData.sectionId}
-                onChange={(e) => setFormData({ ...formData, sectionId: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="">Select Section</option>
-                {sections
-                  .filter((s) => !formData.classId || s.classId?._id === formData.classId || s.classId === formData.classId)
-                  .map((s) => (
-                    <option key={s._id} value={s._id}>
-                      Section {s.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            <CustomSelect
+              label="Class *"
+              value={formData.classId}
+              onChange={(val) => setFormData({ ...formData, classId: val, sectionId: '' })}
+              options={classes.map((c) => ({
+                value: c._id,
+                label: c.name,
+              }))}
+              placeholder="Select Class..."
+            />
+            <CustomSelect
+              label="Section *"
+              value={formData.sectionId}
+              onChange={(val) => setFormData({ ...formData, sectionId: val })}
+              options={sections
+                .filter(
+                  (s) =>
+                    !formData.classId ||
+                    s.classId?._id === formData.classId ||
+                    s.classId === formData.classId
+                )
+                .map((s) => ({
+                  value: s._id,
+                  label: `Section ${s.name}`,
+                }))}
+              placeholder="Select Section..."
+              disabled={!formData.classId}
+            />
           </div>
 
           <div>

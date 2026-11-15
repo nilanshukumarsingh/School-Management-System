@@ -4,6 +4,7 @@ import { useToast } from '../../context/ToastContext';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { Download, BarChart3, Filter } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -118,19 +119,17 @@ export const ReportsPage = () => {
 
       {/* Filter Bar */}
       <Card className="p-4">
-        <div className="flex items-center gap-3">
-          <label className="text-xs font-bold uppercase text-slate-700">Select Exam Cohort:</label>
-          <select
+        <div className="max-w-md">
+          <CustomSelect
+            label="Select Exam Cohort"
             value={selectedExam}
-            onChange={(e) => setSelectedExam(e.target.value)}
-            className="w-full sm:w-72 py-2 px-3 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-          >
-            {exams.map((ex) => (
-              <option key={ex._id} value={ex._id}>
-                {ex.name} ({ex.academicYear})
-              </option>
-            ))}
-          </select>
+            onChange={(val) => setSelectedExam(val)}
+            options={exams.map((ex) => ({
+              value: ex._id,
+              label: `${ex.name} (${ex.academicYear})`,
+            }))}
+            placeholder="Select examination cohort..."
+          />
         </div>
       </Card>
 

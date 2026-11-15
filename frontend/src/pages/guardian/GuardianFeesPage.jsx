@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { CreditCard, CheckCircle2, History, Receipt } from 'lucide-react';
 
 export const GuardianFeesPage = () => {
@@ -251,19 +252,16 @@ export const GuardianFeesPage = () => {
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Payment Method
-              </label>
-              <select
-                value={payMethod}
-                onChange={(e) => setPayMethod(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="SIMULATED_CARD">Simulated Card Checkout</option>
-                <option value="BANK_TRANSFER">Bank Wire Transfer</option>
-              </select>
-            </div>
+            <CustomSelect
+              label="Payment Method"
+              value={payMethod}
+              onChange={(val) => setPayMethod(val)}
+              options={[
+                { value: 'SIMULATED_CARD', label: 'Simulated Card Checkout' },
+                { value: 'BANK_TRANSFER', label: 'Bank Wire Transfer' },
+              ]}
+              placeholder="Select payment method..."
+            />
 
             <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed">
               💡 <strong>Demo Simulation:</strong> No actual financial transactions or card

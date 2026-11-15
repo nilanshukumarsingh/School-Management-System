@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { Award, Plus, Edit, Calculator, FileText, CheckCircle, Check } from 'lucide-react';
 
 export const ExaminationsPage = () => {
@@ -260,25 +261,17 @@ export const ExaminationsPage = () => {
         maxWidth="max-w-2xl"
       >
         <form onSubmit={handleSaveMarks} className="space-y-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Select Student *
-            </label>
-            <select
-              required
-              value={marksForm.studentId}
-              onChange={(e) => {
-                initMarksForStudent(e.target.value);
-              }}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {students.map((s) => (
-                <option key={s._id} value={s._id}>
-                  {s.firstName} {s.lastName} ({s.admissionNumber} - {s.classId?.name})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Select Student *"
+            value={marksForm.studentId}
+            onChange={(val) => initMarksForStudent(val)}
+            options={students.map((s) => ({
+              value: s._id,
+              label: `${s.firstName} ${s.lastName}`,
+              subtitle: `Adm: ${s.admissionNumber} • ${s.classId?.name || 'Unassigned'}`,
+            }))}
+            placeholder="Choose student to evaluate..."
+          />
 
           <div className="overflow-x-auto border border-slate-200 rounded-xl">
             <table className="w-full text-left text-xs">
@@ -367,21 +360,18 @@ export const ExaminationsPage = () => {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Exam Type
-              </label>
-              <select
-                value={examForm.examType}
-                onChange={(e) => setExamForm({ ...examForm, examType: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="MIDTERM">Midterm</option>
-                <option value="FINAL">Final</option>
-                <option value="UNIT_TEST">Unit Test</option>
-                <option value="QUARTERLY">Quarterly</option>
-              </select>
-            </div>
+            <CustomSelect
+              label="Exam Type"
+              value={examForm.examType}
+              onChange={(val) => setExamForm({ ...examForm, examType: val })}
+              options={[
+                { value: 'MIDTERM', label: 'Midterm Examination' },
+                { value: 'FINAL', label: 'Final Examination' },
+                { value: 'UNIT_TEST', label: 'Unit Test' },
+                { value: 'QUARTERLY', label: 'Quarterly Assessment' },
+              ]}
+              placeholder="Select type..."
+            />
             <div>
               <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
                 Academic Year *

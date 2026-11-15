@@ -5,6 +5,7 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { Award, Save, Calculator } from 'lucide-react';
 
 export const TeacherMarksPage = () => {
@@ -143,62 +144,46 @@ export const TeacherMarksPage = () => {
 
       <Card className="p-5">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Examination
-            </label>
-            <select
-              value={selectedExamId}
-              onChange={(e) => setSelectedExamId(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {exams.map((ex) => (
-                <option key={ex._id} value={ex._id}>
-                  {ex.name} ({ex.academicYear})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Examination"
+            value={selectedExamId}
+            onChange={(val) => setSelectedExamId(val)}
+            options={exams.map((ex) => ({
+              value: ex._id,
+              label: `${ex.name} (${ex.academicYear})`,
+            }))}
+            placeholder="Select examination..."
+          />
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Class & Section
-            </label>
-            <select
-              value={selectedAsg?._id || ''}
-              onChange={(e) => {
-                const found = assignments.find((a) => a._id === e.target.value);
-                if (found) setSelectedAsg(found);
-              }}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {assignments.map((asg) => (
-                <option key={asg._id} value={asg._id}>
-                  {asg.classId?.name} - Section {asg.sectionId?.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Class & Section"
+            value={selectedAsg?._id || ''}
+            onChange={(val) => {
+              const found = assignments.find((a) => a._id === val);
+              if (found) setSelectedAsg(found);
+            }}
+            options={assignments.map((asg) => ({
+              value: asg._id,
+              label: `${asg.classId?.name} - Section ${asg.sectionId?.name}`,
+            }))}
+            placeholder="Select class section..."
+          />
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Select Student
-            </label>
-            <select
-              value={selectedStudentId}
-              onChange={(e) => {
-                setSelectedStudentId(e.target.value);
-                initMarks(subjects);
-              }}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {students.map((s) => (
-                <option key={s._id} value={s._id}>
-                  {s.firstName} {s.lastName} ({s.admissionNumber})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Select Student"
+            value={selectedStudentId}
+            onChange={(val) => {
+              setSelectedStudentId(val);
+              initMarks(subjects);
+            }}
+            options={students.map((s) => ({
+              value: s._id,
+              label: `${s.firstName} ${s.lastName}`,
+              subtitle: `Admission: ${s.admissionNumber}`,
+            }))}
+            placeholder="Select student..."
+            disabled={students.length === 0}
+          />
         </div>
       </Card>
 

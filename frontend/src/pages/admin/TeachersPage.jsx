@@ -7,6 +7,7 @@ import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { TableSkeleton } from '../../components/common/Skeleton';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { Users, Plus, Search, Edit, Trash2 } from 'lucide-react';
 
 export const TeachersPage = () => {
@@ -335,20 +336,17 @@ export const TeachersPage = () => {
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
               />
             </div>
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Availability Status
-              </label>
-              <select
-                value={formData.availabilityStatus}
-                onChange={(e) => setFormData({ ...formData, availabilityStatus: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="AVAILABLE">Available</option>
-                <option value="ON_LEAVE">On Leave</option>
-                <option value="BUSY">Busy</option>
-              </select>
-            </div>
+            <CustomSelect
+              label="Availability Status"
+              value={formData.availabilityStatus}
+              onChange={(val) => setFormData({ ...formData, availabilityStatus: val })}
+              options={[
+                { value: 'AVAILABLE', label: 'Available' },
+                { value: 'ON_LEAVE', label: 'On Leave' },
+                { value: 'BUSY', label: 'Busy' },
+              ]}
+              placeholder="Select availability..."
+            />
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">

@@ -79,36 +79,42 @@ export const LandingPage = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[500px] bg-gradient-to-b from-indigo-100/60 via-purple-50/30 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       {/* Top Glassmorphic Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/85 border-b border-slate-200/80 shadow-xs">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <Logo size="md" showText={true} textVariant="dark" subtitle="Academy OS" />
-          </Link>
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200/80 shadow-xs">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+          {/* Brand Logo & Version Pill */}
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
+              <Logo size="md" showText={true} textVariant="dark" subtitle="Academy OS" />
+            </Link>
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200/70 text-[11px] font-mono font-bold text-indigo-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              v2.4 Production
+            </span>
+          </div>
 
-          {/* Center Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-bold text-slate-600">
-            <a href="#console-preview" className="hover:text-indigo-600 transition">
+          {/* Center Segmented Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/70 p-1 rounded-full border border-slate-200/60 text-xs font-bold text-slate-600">
+            <a href="#console-preview" className="px-3 py-1.5 rounded-full hover:text-indigo-600 hover:bg-white transition shadow-2xs">
               Live Console
             </a>
-            <a href="#architecture" className="hover:text-indigo-600 transition">
+            <a href="#architecture" className="px-3 py-1.5 rounded-full hover:text-indigo-600 hover:bg-white transition shadow-2xs">
               Integrity Engine
             </a>
-            <a href="#roles-matrix" className="hover:text-indigo-600 transition">
+            <a href="#roles-matrix" className="px-3 py-1.5 rounded-full hover:text-indigo-600 hover:bg-white transition shadow-2xs">
               Role Matrix
             </a>
             <a
               href="http://localhost:5000/api-docs"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 hover:text-indigo-600 transition text-slate-500"
+              className="px-3 py-1.5 rounded-full flex items-center gap-1 hover:text-indigo-600 hover:bg-white transition shadow-2xs text-slate-500"
             >
               Swagger Docs <ExternalLink className="w-3 h-3" />
             </a>
           </nav>
 
           {/* Right Action */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             {isAuthenticated ? (
               <Button
                 variant="primary"
@@ -118,24 +124,20 @@ export const LandingPage = () => {
                   else if (user?.role === 'TEACHER') navigate('/teacher/dashboard');
                   else navigate('/guardian/dashboard');
                 }}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 font-bold"
+                className="font-bold shadow-md shadow-indigo-600/20"
               >
-                Go to Workspace <ArrowRight className="w-4 h-4 ml-1" />
+                Go to Workspace <ArrowRight className="w-3.5 h-3.5 ml-1 shrink-0" />
               </Button>
             ) : (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <Link
                   to="/login"
-                  className="text-xs font-bold text-slate-600 hover:text-indigo-600 px-3 py-1.5 transition"
+                  className="text-xs font-bold text-slate-600 hover:text-indigo-600 px-3 py-1.5 rounded-xl hover:bg-slate-100/70 transition"
                 >
                   Sign In
                 </Link>
                 <Link to="/login">
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 font-bold"
-                  >
+                  <Button variant="primary" size="sm" className="font-bold shadow-md shadow-indigo-600/20">
                     Open Console
                   </Button>
                 </Link>
@@ -1013,7 +1015,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Modern Executive Footer */}
-      <footer className="mt-auto bg-slate-900 border-t border-slate-800 py-12 px-6 text-slate-400">
+      <footer className="mt-auto bg-[#0B1120] border-t border-slate-800/80 py-12 px-6 text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
           <div className="flex items-center gap-3">
             <Logo size="sm" showText={true} textVariant="light" subtitle="Academic Operations Platform" />

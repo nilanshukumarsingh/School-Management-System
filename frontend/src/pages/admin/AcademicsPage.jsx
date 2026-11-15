@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { BookOpen, Plus, Trash2, Users, School, Layers, CheckCircle } from 'lucide-react';
 
 export const AcademicsPage = () => {
@@ -416,22 +417,17 @@ export const AcademicsPage = () => {
         description="Add a section to a specific class."
       >
         <form onSubmit={handleCreateSection} className="space-y-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class *</label>
-            <select
-              required
-              value={sectionForm.classId}
-              onChange={(e) => setSectionForm({ ...sectionForm, classId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">Select Class</option>
-              {classes.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Class *"
+            value={sectionForm.classId}
+            onChange={(val) => setSectionForm({ ...sectionForm, classId: val })}
+            options={classes.map((c) => ({
+              value: c._id,
+              label: c.name,
+              subtitle: `Year: ${c.academicYear}`,
+            }))}
+            placeholder="Select Class..."
+          />
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
@@ -505,22 +501,17 @@ export const AcademicsPage = () => {
               />
             </div>
           </div>
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class *</label>
-            <select
-              required
-              value={subjectForm.classId}
-              onChange={(e) => setSubjectForm({ ...subjectForm, classId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">Select Class</option>
-              {classes.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Class *"
+            value={subjectForm.classId}
+            onChange={(val) => setSubjectForm({ ...subjectForm, classId: val })}
+            options={classes.map((c) => ({
+              value: c._id,
+              label: c.name,
+              subtitle: `Year: ${c.academicYear}`,
+            }))}
+            placeholder="Select Class..."
+          />
           <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button variant="secondary" size="sm" onClick={() => setIsSubjectModalOpen(false)}>
               Cancel
@@ -540,79 +531,69 @@ export const AcademicsPage = () => {
         description="Enforces teacher access boundaries."
       >
         <form onSubmit={handleAssignTeacher} className="space-y-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Teacher *</label>
-            <select
-              required
-              value={assignForm.teacherId}
-              onChange={(e) => setAssignForm({ ...assignForm, teacherId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">Select Teacher</option>
-              {teachers.map((t) => (
-                <option key={t._id} value={t._id}>
-                  {t.userId?.name} ({t.employeeId} - {t.designation})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Teacher *"
+            value={assignForm.teacherId}
+            onChange={(val) => setAssignForm({ ...assignForm, teacherId: val })}
+            options={teachers.map((t) => ({
+              value: t._id,
+              label: t.userId?.name || 'Faculty',
+              subtitle: `${t.employeeId} • ${t.designation || 'Instructor'}`,
+            }))}
+            placeholder="Select Teacher..."
+          />
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class *</label>
-              <select
-                required
-                value={assignForm.classId}
-                onChange={(e) => setAssignForm({ ...assignForm, classId: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="">Select Class</option>
-                {classes.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Section *</label>
-              <select
-                required
-                value={assignForm.sectionId}
-                onChange={(e) => setAssignForm({ ...assignForm, sectionId: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="">Select Section</option>
-                {sections
-                  .filter((s) => !assignForm.classId || s.classId?._id === assignForm.classId || s.classId === assignForm.classId)
-                  .map((s) => (
-                    <option key={s._id} value={s._id}>
-                      Section {s.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            <CustomSelect
+              label="Class *"
+              value={assignForm.classId}
+              onChange={(val) => setAssignForm({ ...assignForm, classId: val, sectionId: '', subjectId: '' })}
+              options={classes.map((c) => ({
+                value: c._id,
+                label: c.name,
+              }))}
+              placeholder="Select Class..."
+            />
+            <CustomSelect
+              label="Section *"
+              value={assignForm.sectionId}
+              onChange={(val) => setAssignForm({ ...assignForm, sectionId: val })}
+              options={sections
+                .filter(
+                  (s) =>
+                    !assignForm.classId ||
+                    s.classId?._id === assignForm.classId ||
+                    s.classId === assignForm.classId
+                )
+                .map((s) => ({
+                  value: s._id,
+                  label: `Section ${s.name}`,
+                }))}
+              placeholder="Select Section..."
+              disabled={!assignForm.classId}
+            />
           </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Subject (Optional for Homeroom)
-            </label>
-            <select
-              value={assignForm.subjectId}
-              onChange={(e) => setAssignForm({ ...assignForm, subjectId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">No specific subject (Class Teacher Only)</option>
-              {subjects
-                .filter((sub) => !assignForm.classId || sub.classId?._id === assignForm.classId || sub.classId === assignForm.classId)
-                .map((sub) => (
-                  <option key={sub._id} value={sub._id}>
-                    {sub.name} ({sub.code})
-                  </option>
-                ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Subject (Optional for Homeroom)"
+            value={assignForm.subjectId}
+            onChange={(val) => setAssignForm({ ...assignForm, subjectId: val })}
+            options={[
+              { value: '', label: 'No specific subject (Class Teacher Only)' },
+              ...subjects
+                .filter(
+                  (sub) =>
+                    !assignForm.classId ||
+                    sub.classId?._id === assignForm.classId ||
+                    sub.classId === assignForm.classId
+                )
+                .map((sub) => ({
+                  value: sub._id,
+                  label: `${sub.name} (${sub.code})`,
+                })),
+            ]}
+            placeholder="Select Subject..."
+          />
 
           <div className="flex items-center gap-2 pt-2">
             <input

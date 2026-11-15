@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { CreditCard, Plus, DollarSign, Receipt, Search, CheckCircle2, History } from 'lucide-react';
 
 export const FeesPage = () => {
@@ -380,21 +381,18 @@ export const FeesPage = () => {
               </span>
             </div>
 
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Payment Method
-              </label>
-              <select
-                value={paymentForm.paymentMethod}
-                onChange={(e) => setPaymentForm({ ...paymentForm, paymentMethod: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="SIMULATED_CARD">Simulated Credit Card</option>
-                <option value="BANK_TRANSFER">Direct Bank Transfer</option>
-                <option value="CASH">Institutional Cash Counter</option>
-                <option value="CHEQUE">Bank Cheque</option>
-              </select>
-            </div>
+            <CustomSelect
+              label="Payment Method"
+              value={paymentForm.paymentMethod}
+              onChange={(val) => setPaymentForm({ ...paymentForm, paymentMethod: val })}
+              options={[
+                { value: 'SIMULATED_CARD', label: 'Simulated Credit Card' },
+                { value: 'BANK_TRANSFER', label: 'Direct Bank Transfer' },
+                { value: 'CASH', label: 'Institutional Cash Counter' },
+                { value: 'CHEQUE', label: 'Bank Cheque' },
+              ]}
+              placeholder="Select method..."
+            />
 
             <div>
               <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Notes</label>
@@ -439,22 +437,16 @@ export const FeesPage = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Class *</label>
-              <select
-                required
-                value={structureForm.classId}
-                onChange={(e) => setStructureForm({ ...structureForm, classId: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-              >
-                <option value="">Select Class</option>
-                {classes.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomSelect
+              label="Class *"
+              value={structureForm.classId}
+              onChange={(val) => setStructureForm({ ...structureForm, classId: val })}
+              options={classes.map((c) => ({
+                value: c._id,
+                label: c.name,
+              }))}
+              placeholder="Select Class..."
+            />
             <div>
               <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Due Date *</label>
               <input
@@ -486,42 +478,31 @@ export const FeesPage = () => {
         description="Generates student invoices for a specific class and fee structure."
       >
         <form onSubmit={handleGenerateInvoices} className="space-y-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Fee Structure *
-            </label>
-            <select
-              required
-              value={generateForm.feeStructureId}
-              onChange={(e) => setGenerateForm({ ...generateForm, feeStructureId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">Select Fee Structure</option>
-              {structures.map((s) => (
-                <option key={s._id} value={s._id}>
-                  {s.name} (${s.totalAmount})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Fee Structure *"
+            value={generateForm.feeStructureId}
+            onChange={(val) => setGenerateForm({ ...generateForm, feeStructureId: val })}
+            options={structures.map((s) => ({
+              value: s._id,
+              label: s.name,
+              subtitle: `Amount: $${s.totalAmount} • Year: ${s.academicYear}`,
+            }))}
+            placeholder="Select Fee Structure..."
+          />
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Target Class (Optional - defaults to structure class)
-            </label>
-            <select
-              value={generateForm.classId}
-              onChange={(e) => setGenerateForm({ ...generateForm, classId: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">Use Structure Default Class</option>
-              {classes.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Target Class (Optional - defaults to structure class)"
+            value={generateForm.classId}
+            onChange={(val) => setGenerateForm({ ...generateForm, classId: val })}
+            options={[
+              { value: '', label: 'Use Structure Default Class' },
+              ...classes.map((c) => ({
+                value: c._id,
+                label: c.name,
+              })),
+            ]}
+            placeholder="Choose Class Override..."
+          />
 
           <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button variant="secondary" size="sm" onClick={() => setIsGenerateModalOpen(false)}>

@@ -20,6 +20,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Activity,
+  Globe,
 } from 'lucide-react';
 
 export const DashboardLayout = () => {
@@ -81,20 +82,20 @@ export const DashboardLayout = () => {
       {/* Mobile Backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* Unique Executive Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col bg-white border-r border-slate-200/80 transition-all duration-300 ease-in-out shadow-xs ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col bg-[#0B1120] text-slate-300 border-r border-slate-800/80 transition-all duration-300 ease-in-out shadow-xl ${
           collapsed ? 'w-20' : 'w-64'
         } ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
         {/* Brand Header with Collapsed Guard */}
         <div
-          className={`flex items-center h-16 border-b border-slate-100 transition-all ${
+          className={`flex items-center h-16 border-b border-slate-800/80 transition-all ${
             collapsed ? 'justify-center px-2 relative' : 'justify-between px-4'
           }`}
         >
@@ -102,7 +103,7 @@ export const DashboardLayout = () => {
           <Logo
             size={collapsed ? 'sm' : 'md'}
             showText={!collapsed}
-            textVariant="dark"
+            textVariant="light"
             subtitle="Academy OS"
           />
 
@@ -111,8 +112,8 @@ export const DashboardLayout = () => {
             onClick={() => setCollapsed(!collapsed)}
             className={`hidden lg:flex items-center justify-center transition-all ${
               collapsed
-                ? 'absolute -right-3.5 top-5 w-7 h-7 rounded-full bg-white border border-slate-200 shadow-md text-slate-500 hover:text-indigo-600 hover:scale-110 z-30 cursor-pointer'
-                : 'p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer'
+                ? 'absolute -right-3.5 top-5 w-7 h-7 rounded-full bg-[#0F172A] border border-slate-700 shadow-lg text-slate-300 hover:text-white hover:border-indigo-500 hover:scale-110 z-30 cursor-pointer'
+                : 'p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] cursor-pointer'
             }`}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
@@ -122,30 +123,33 @@ export const DashboardLayout = () => {
           {/* Mobile Close Button */}
           <button
             onClick={() => setMobileOpen(false)}
-            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100"
+            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08]"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* User Card inside Sidebar */}
-        <div className={`border-b border-slate-100 ${collapsed ? 'p-2' : 'p-3'}`}>
+        {/* User Profile Card inside Sidebar */}
+        <div className={`border-b border-slate-800/80 ${collapsed ? 'p-2' : 'p-3'}`}>
           <div
-            className={`flex items-center gap-3 rounded-2xl bg-slate-50/80 border border-slate-100 ${
+            className={`flex items-center gap-3 rounded-2xl bg-white/[0.04] border border-white/[0.06] ${
               collapsed ? 'justify-center p-1.5' : 'p-2.5'
             }`}
           >
-            <img
-              src={
-                user?.avatar ||
-                `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.email || 'scholaverse'}`
-              }
-              alt="Avatar"
-              className="w-8 h-8 rounded-xl object-cover border border-slate-200 shrink-0 shadow-xs"
-            />
+            <div className="relative shrink-0">
+              <img
+                src={
+                  user?.avatar ||
+                  `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.email || 'scholaverse'}`
+                }
+                alt="Avatar"
+                className="w-8 h-8 rounded-xl object-cover border border-slate-700 shadow-xs"
+              />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 absolute -bottom-0.5 -right-0.5 ring-2 ring-[#0B1120]" />
+            </div>
             {!collapsed && (
               <div className="overflow-hidden flex-1 min-w-0">
-                <p className="text-xs font-bold text-slate-900 truncate">{user?.name}</p>
+                <p className="text-xs font-bold text-white truncate">{user?.name}</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <Badge variant={roleBadgeVariant} size="xs">
                     {user?.role}
@@ -164,10 +168,10 @@ export const DashboardLayout = () => {
               to={item.path}
               onClick={() => setMobileOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl text-sm font-medium transition-all ${
+                `flex items-center gap-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20 font-semibold'
-                    : 'text-slate-600 hover:bg-slate-100/80 hover:text-slate-900'
+                    ? 'bg-gradient-to-r from-indigo-600 via-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-600/30 font-bold border-l-2 border-indigo-300'
+                    : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.06]'
                 } ${collapsed ? 'justify-center p-2.5' : 'px-3 py-2.5'}`
               }
               title={collapsed ? item.label : undefined}
@@ -179,10 +183,10 @@ export const DashboardLayout = () => {
         </nav>
 
         {/* Footer with Logout */}
-        <div className={`border-t border-slate-100 ${collapsed ? 'p-2' : 'p-3'}`}>
+        <div className={`border-t border-slate-800/80 ${collapsed ? 'p-2' : 'p-3'}`}>
           <button
             onClick={handleLogout}
-            className={`flex items-center gap-3 w-full rounded-xl text-sm font-medium text-rose-600 hover:bg-rose-50 transition ${
+            className={`flex items-center gap-3 w-full rounded-xl text-sm font-medium text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition cursor-pointer ${
               collapsed ? 'justify-center p-2.5' : 'px-3 py-2.5'
             }`}
             title="Log out of session"
@@ -196,32 +200,55 @@ export const DashboardLayout = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Header */}
-        <header className="h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-6 flex items-center justify-between shrink-0 shadow-xs z-10">
+        <header className="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-6 flex items-center justify-between shrink-0 shadow-xs z-10">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden p-2 rounded-xl text-slate-500 hover:bg-slate-100"
+              className="lg:hidden p-2 rounded-xl text-slate-500 hover:bg-slate-100 cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>
             <div>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block font-mono">
-                Academic Portal
-              </span>
-              <span className="text-sm font-extrabold text-slate-800">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block font-mono">
+                  Academic Portal
+                </span>
+                <span className="text-slate-300">•</span>
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md font-mono ${
+                    isAdmin
+                      ? 'bg-purple-100 text-purple-700'
+                      : isTeacher
+                      ? 'bg-indigo-100 text-indigo-700'
+                      : 'bg-emerald-100 text-emerald-700'
+                  }`}
+                >
+                  {user?.role} CONSOLE
+                </span>
+              </div>
+              <span className="text-sm font-extrabold text-slate-900 tracking-tight">
                 ScholaVerse • Term 2026-2027
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate('/')}
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-slate-50/70 hover:bg-slate-100/70 text-xs font-semibold text-slate-600 transition cursor-pointer"
+              title="Visit public landing page"
+            >
+              <Globe className="w-3.5 h-3.5 text-indigo-500" />
+              <span>Public Site</span>
+            </button>
+
             <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50/80 border border-emerald-200/60 rounded-full text-xs font-semibold text-emerald-700">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Live Database Connected
             </div>
             <div className="text-right hidden sm:block">
-              <span className="text-xs font-bold text-slate-800 block">{user?.name}</span>
-              <span className="text-[11px] text-slate-400 block font-mono">{user?.email}</span>
+              <span className="text-xs font-bold text-slate-900 block">{user?.name}</span>
+              <span className="text-[11px] text-slate-500 block font-mono">{user?.email}</span>
             </div>
           </div>
         </header>

@@ -5,6 +5,7 @@ import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { EmptyState } from '../../components/common/EmptyState';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { CalendarCheck, Save } from 'lucide-react';
 
 export const TeacherAttendancePage = () => {
@@ -144,48 +145,44 @@ export const TeacherAttendancePage = () => {
 
       <Card className="p-5">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-              Authorized Class & Section
-            </label>
-            <select
-              value={selectedAsg?._id || ''}
-              onChange={(e) => {
-                const found = assignments.find((a) => a._id === e.target.value);
-                if (found) setSelectedAsg(found);
-              }}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              {assignments.map((asg) => (
-                <option key={asg._id} value={asg._id}>
-                  {asg.classId?.name} - Section {asg.sectionId?.name} ({asg.subjectId?.name || 'Class Teacher'})
-                </option>
-              ))}
-            </select>
-          </div>
+          <CustomSelect
+            label="Authorized Class & Section"
+            value={selectedAsg?._id || ''}
+            onChange={(val) => {
+              const found = assignments.find((a) => a._id === val);
+              if (found) setSelectedAsg(found);
+            }}
+            options={assignments.map((asg) => ({
+              value: asg._id,
+              label: `${asg.classId?.name} - Section ${asg.sectionId?.name}`,
+              subtitle: asg.subjectId?.name ? `Subject: ${asg.subjectId.name}` : 'Homeroom Lead',
+            }))}
+            placeholder="Select class section..."
+          />
 
           <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Session Date</label>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1 font-mono">
+              Session Date
+            </label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+              className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-200/90 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/15 shadow-xs font-medium text-slate-800"
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Session</label>
-            <select
-              value={session}
-              onChange={(e) => setSession(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="FULL_DAY">Full Day Attendance</option>
-              <option value="MORNING">Morning Only</option>
-              <option value="AFTERNOON">Afternoon Only</option>
-            </select>
-          </div>
+          <CustomSelect
+            label="Session"
+            value={session}
+            onChange={(val) => setSession(val)}
+            options={[
+              { value: 'FULL_DAY', label: 'Full Day Attendance' },
+              { value: 'MORNING', label: 'Morning Only' },
+              { value: 'AFTERNOON', label: 'Afternoon Only' },
+            ]}
+            placeholder="Select session..."
+          />
         </div>
 
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">

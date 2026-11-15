@@ -5,6 +5,7 @@ import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
 import { Modal } from '../../components/common/Modal';
 import { TableSkeleton } from '../../components/common/Skeleton';
+import { CustomSelect } from '../../components/common/CustomSelect';
 import { ShieldAlert, Search, Filter, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const AuditLogsPage = () => {
@@ -68,25 +69,26 @@ export const AuditLogsPage = () => {
             />
           </div>
 
-          <div className="w-full sm:w-56">
-            <select
+          <div className="w-full sm:w-64">
+            <CustomSelect
               value={selectedModule}
-              onChange={(e) => {
-                setSelectedModule(e.target.value);
+              onChange={(val) => {
+                setSelectedModule(val);
                 setPage(1);
               }}
-              className="w-full py-2 px-3 text-sm bg-slate-50 border border-slate-200 rounded-xl"
-            >
-              <option value="">All Functional Modules</option>
-              <option value="AUTH">Authentication</option>
-              <option value="STUDENT">Student Management</option>
-              <option value="TEACHER">Teacher Management</option>
-              <option value="ACADEMICS">Academics</option>
-              <option value="ATTENDANCE">Attendance</option>
-              <option value="EXAMINATION">Examinations</option>
-              <option value="FEES">Fee Ledger</option>
-              <option value="SYSTEM">System & Bootstrap</option>
-            </select>
+              options={[
+                { value: '', label: 'All Functional Modules' },
+                { value: 'AUTH', label: 'Authentication' },
+                { value: 'STUDENT', label: 'Student Management' },
+                { value: 'TEACHER', label: 'Teacher Management' },
+                { value: 'ACADEMICS', label: 'Academics' },
+                { value: 'ATTENDANCE', label: 'Attendance' },
+                { value: 'EXAMINATION', label: 'Examinations' },
+                { value: 'FEES', label: 'Fee Ledger' },
+                { value: 'SYSTEM', label: 'System & Bootstrap' },
+              ]}
+              placeholder="Filter by Module..."
+            />
           </div>
         </div>
       </Card>

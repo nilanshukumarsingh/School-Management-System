@@ -190,28 +190,28 @@ The database utilizes 15 collections with reference ObjectIds and unique compoun
 
 ```mermaid
 erDiagram
-    USER ||--o| TEACHER : "profile"
-    USER ||--o| GUARDIAN : "profile"
-    USER ||--o{ AUDIT_LOG : "generates"
+    USER ||--o| TEACHER : profile
+    USER ||--o| GUARDIAN : profile
+    USER ||--o{ AUDIT_LOG : generates
 
-    ACADEMIC_CLASS ||--|{ SECTION : "has"
-    ACADEMIC_CLASS ||--|{ SUBJECT : "offers"
-    ACADEMIC_CLASS ||--|{ STUDENT : "contains"
-    ACADEMIC_CLASS ||--|{ FEE_STRUCTURE : "bills"
+    ACADEMIC_CLASS ||--|{ SECTION : contains
+    ACADEMIC_CLASS ||--|{ SUBJECT : offers
+    ACADEMIC_CLASS ||--|{ STUDENT : enrolls
+    ACADEMIC_CLASS ||--|{ FEE_STRUCTURE : bills
 
-    SECTION ||--|{ TEACHER_ASSIGNMENT : "allocated to"
-    TEACHER ||--|{ TEACHER_ASSIGNMENT : "teaches"
-    SUBJECT ||--o{ TEACHER_ASSIGNMENT : "curriculum"
+    SECTION ||--|{ TEACHER_ASSIGNMENT : allocated
+    TEACHER ||--|{ TEACHER_ASSIGNMENT : teaches
+    SUBJECT ||--o{ TEACHER_ASSIGNMENT : curriculum
 
-    GUARDIAN ||--|{ STUDENT : "linked to"
+    GUARDIAN ||--|{ STUDENT : oversees
 
-    STUDENT ||--|{ ATTENDANCE : "logged in"
-    STUDENT ||--|{ EXAM_RESULT : "graded in"
-    STUDENT ||--|{ FEE_INVOICE : "charged with"
+    STUDENT ||--|{ ATTENDANCE : records
+    STUDENT ||--|{ EXAM_RESULT : grades
+    STUDENT ||--|{ FEE_INVOICE : charges
 
-    EXAMINATION ||--|{ EXAM_RESULT : "evaluates"
-    FEE_STRUCTURE ||--|{ FEE_INVOICE : "generates"
-    FEE_INVOICE ||--|{ PAYMENT : "reconciles with"
+    EXAMINATION ||--|{ EXAM_RESULT : evaluates
+    FEE_STRUCTURE ||--|{ FEE_INVOICE : generates
+    FEE_INVOICE ||--|{ PAYMENT : reconciles
 ```
 
 *For complete schema attributes, index definitions, and types, see [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md).*
