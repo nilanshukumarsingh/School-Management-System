@@ -218,7 +218,28 @@ erDiagram
 
 ---
 
-## 7. Interactive API Documentation
+## 7. Vercel Multi-Service Deployment
+
+The repository is configured to deploy as a unified **Vercel Multi-Service Project** governed by [`vercel.json`](vercel.json):
+
+- **`backend` service**: Express.js REST API with automatic serverless database caching and interactive OpenAPI docs.
+- **`frontend` service**: React Vite Single Page Application.
+- **Unified Routing**:
+  - `/api/(.*)` &rarr; routes directly to the Express `backend` service.
+  - `/api-docs(.*)` &rarr; routes to the Swagger UI on the `backend` service.
+  - `/(.*)` &rarr; routes to the Vite `frontend` Single Page Application.
+
+### Quick Deployment Instructions:
+1. Import this repository into your [Vercel Dashboard](https://vercel.com/new). Vercel automatically recognizes the multi-service layout from `vercel.json`.
+2. Configure your Production Environment Variables in Vercel:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string (`mongodb+srv://...`).
+   - `JWT_SECRET`: Secure cryptographic key for JWT authentication.
+   - `NODE_ENV`: `production`
+3. Click **Deploy**. Both services build and deploy under a single unified domain with zero CORS friction.
+
+---
+
+## 8. Interactive API Documentation
 OpenAPI 3.0 documentation is mounted via Swagger UI on the backend at:
 - **URL**: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
 
@@ -233,7 +254,7 @@ Key endpoints documented:
 
 ---
 
-## 8. Technical Design Decisions & System Architecture
+## 9. Technical Design Decisions & System Architecture
 
 1. **Modular Express Architecture**: Separation of routes, controllers, models, and middleware enables clean testability and code maintainability.
 2. **Server-Side Security**: Authentication tokens are signed with HMAC SHA-256 JWTs. RBAC middleware verifies role permissions on every API request.
@@ -247,13 +268,13 @@ Key endpoints documented:
 
 ---
 
-## 9. Known Assumptions & Limitations
+## 10. Known Assumptions & Limitations
 - **Simulated Payments**: No real payment gateway (Stripe/PayPal) is integrated. The simulated checkout records mock payment records with transaction receipts and validates ledger reconciliation.
 - **Single Institutional Domain**: The platform is modeled as a single institution system with academic years rather than a multi-school SaaS hosting disparate districts.
 
 ---
 
-## 10. AI Usage & Attribution Section
+## 11. AI Usage & Attribution Section
 - **AI Assistive Technology**: Antigravity AI (Google DeepMind) was utilized during the development process as an architectural design sounding board, automated code generation assistant, test authoring facilitator, and documentation generator.
 - **Dataset / Library Attribution**:
   - UI Icons provided by `lucide-react`.
