@@ -1,4 +1,9 @@
+const path = require('path');
+// Load environment variables from root or backend directory
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 require('dotenv').config();
+
 const app = require('./app');
 const { connectDB, disconnectDB } = require('./config/db');
 
